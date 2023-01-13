@@ -1,11 +1,18 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import { LoadingIndicator } from '../components/LoadingIndicator';
 import { useMovies } from '../hooks/useMovies';
 
 
 export const HomeScreen = () => {
 
-  const { allMovies } = useMovies();
+  const { allMovies, isLoading } = useMovies();
+
+  if (isLoading) {
+    return (
+      <LoadingIndicator />
+    )
+  }
 
   return (
     <View>
