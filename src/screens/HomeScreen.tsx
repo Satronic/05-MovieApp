@@ -1,18 +1,16 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View, Text } from 'react-native';
-import movieAPI from '../api/movieApi';
-import { MovieApiNowPlaying } from '../interfaces/movieApiInterface';
+import { useMovies } from '../hooks/useMovies';
+
 
 export const HomeScreen = () => {
 
-  useEffect(() => {
-    movieAPI.get<MovieApiNowPlaying>('/now_playing')
-      .then(response => console.log(JSON.stringify(response.data.results, null, 4)))
-  }, [])
+  const { allMovies } = useMovies();
 
   return (
     <View>
       <Text>Home Screen</Text>
+      <Text>{JSON.stringify(allMovies[0], null, 4)}</Text>
     </View>
   )
 }
