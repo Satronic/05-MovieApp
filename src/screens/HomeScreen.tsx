@@ -13,7 +13,7 @@ const { width: widthDevice } = Dimensions.get('window')
 export const HomeScreen = () => {
 
   const { top } = useSafeAreaInsets(); // Asegura un espacio seguro para salir del notch
-  const { allMovies, isLoading } = useMovies();
+  const { movies, isLoading } = useMovies();
 
   if (isLoading) {
     return (
@@ -35,7 +35,7 @@ export const HomeScreen = () => {
           backgroundColor: '#131313'
         }}>
           <Carousel
-            data={allMovies}
+            data={movies.nowPlaying}
             renderItem={({ item }: any) => <MoviePoster movie={item} />}
             sliderWidth={widthDevice}
             itemWidth={240}
@@ -43,7 +43,9 @@ export const HomeScreen = () => {
         </View>
       </View>
 
-      <HorizontalSlider title='Populares' movies={allMovies}/>
+      <HorizontalSlider title='Populares' movies={movies.popular}/>
+      <HorizontalSlider title='Mejor calificadas' movies={movies.topRated}/>
+      <HorizontalSlider title='Próximos estrenos' movies={movies.upcoming}/>
     </ScrollView>
 
   )
