@@ -1,11 +1,14 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { LoadingIndicator } from '../components/LoadingIndicator';
+import { MoviePoster } from '../components/MoviePoster';
 import { useMovies } from '../hooks/useMovies';
 
 
 export const HomeScreen = () => {
 
+  const { top } = useSafeAreaInsets(); // Asegura un espacio seguro para salir del notch
   const { allMovies, isLoading } = useMovies();
 
   if (isLoading) {
@@ -15,9 +18,10 @@ export const HomeScreen = () => {
   }
 
   return (
-    <View>
-      <Text>Home Screen</Text>
-      <Text>{JSON.stringify(allMovies[0], null, 4)}</Text>
+    <View style={{
+      top
+    }}>
+      <MoviePoster movie={allMovies[1]}/>
     </View>
   )
 }
