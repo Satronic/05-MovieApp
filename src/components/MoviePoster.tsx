@@ -3,17 +3,30 @@ import { View, Text, Image, StyleSheet } from 'react-native';
 import { Movie } from '../interfaces/movieApiInterface';
 
 interface MoviePosterProps {
-    movie: Movie
+    movie: Movie,
+    width?: number,
+    height?: number
 }
 
-export const MoviePoster = ({ movie }: MoviePosterProps) => {
+export const MoviePoster = ({ movie, width = 220, height = 330 }: MoviePosterProps) => {
 
     const urlImage = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
 
     return (
-        <View style={styles.containerImage}>
+        <View style={{
+            ...styles.containerImage,
+            width,
+            height,
+            borderRadius: width / 10,
+            margin: width / 25
+        }}>
             <Image
-                style={styles.image}
+                style={{
+                    ...styles.image,
+                    width,
+                    height,
+                    borderRadius: width / 15
+                }}
                 source={{
                     uri: urlImage
                 }}
@@ -24,22 +37,17 @@ export const MoviePoster = ({ movie }: MoviePosterProps) => {
 
 const styles = StyleSheet.create({
     containerImage: {
-        // marginTop: 20,
-        // backgroundColor: 'green',
-        padding: 30,
+        paddingBottom: 10,
+        // margin: '1%',
         alignItems: 'center',
+        shadowColor: "#fff",
+        shadowOpacity: 0.5,
+        shadowRadius: 6.27,
+        elevation: 15,
     },
     image: {
-        width: 240,
-        height: 360,
-        borderRadius: 20,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 5,
-        },
-        shadowOpacity: 0.8,
-        shadowRadius: 6.27
-        // elevation: 5,
+        borderRadius: 15,
+        borderColor: 'white',
+        borderWidth: 0.3
     }
 });
