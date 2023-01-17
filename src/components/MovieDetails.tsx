@@ -1,8 +1,9 @@
 import React from 'react'
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, FlatList, InteractionManager } from 'react-native';
 import { MovieFull } from '../interfaces/movieApiInterface';
 import { Cast } from '../interfaces/movieCreditsInterface';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { CastCard } from './CastCard';
 
 interface MovieDetailsProps {
     movieFull: MovieFull;
@@ -16,11 +17,18 @@ export const MovieDetails = ({ movieFull, cast }: MovieDetailsProps) => {
                 <Icon name="star-outline" size={15} color="yellow" />
                 <Text style={styles.ratingsText}>{movieFull.vote_average}</Text>
                 <Text style={styles.genresText}>
-                {movieFull.genres.map(genre => genre.name).join(' - ')}
-            </Text>
+                    {movieFull.genres.map(genre => genre.name).join(' - ')}
+                </Text>
             </View>
             <Text style={styles.title}>Sinopsis</Text>
             <Text style={styles.text}>{movieFull.overview}</Text>
+            <Text style={styles.title}>Reparto</Text>
+            <FlatList
+                data={cast}
+                keyExtractor={(item) => item.id.toString()}
+                renderItem={({ item }) => <CastCard actor={item} />}
+                horizontal={true}
+            />
         </View>
     )
 }
@@ -29,17 +37,17 @@ const styles = StyleSheet.create({
     container: {
         paddingHorizontal: 10
     },
-    genresText:{
+    genresText: {
         color: 'gray'
     },
     ratingsContainer: {
         flexDirection: 'row',
         // paddingVertical: 2
     },
-    text:{
+    text: {
         color: 'white'
     },
-    ratingsText:{
+    ratingsText: {
         color: 'white',
         paddingHorizontal: 10
     },

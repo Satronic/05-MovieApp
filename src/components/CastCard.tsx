@@ -32,7 +32,8 @@ export const CastCard = ({ actor }: CastCardProps) => {
 
 const styles = StyleSheet.create({
     cardContainer: {
-        margin: 10,
+        marginVertical: 10,
+        marginRight: 5,
         flexDirection: 'row',
         borderColor: 'white',
         borderWidth: 0.5,

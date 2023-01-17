@@ -1,12 +1,10 @@
 import React from 'react';
 import { StackScreenProps } from '@react-navigation/stack';
 import { View, Text, Image, StyleSheet, Dimensions, ScrollView } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
 import { RootStackParams } from '../navigator/StackNavigator';
 import { useMovieDetails } from '../hooks/useMovieDetails';
 import { LoadingIndicator } from '../components/LoadingIndicator';
 import { MovieDetails } from '../components/MovieDetails';
-import { CastCard } from '../components/CastCard';
 
 interface DetailsScreenProps extends StackScreenProps<RootStackParams, 'DetailsScreen'> { };
 
@@ -41,7 +39,6 @@ export const DetailsScreen = ({ route }: DetailsScreenProps) => {
           <MovieDetails movieFull={movieFull!} cast={cast}/>
           // <Text style={styles.subTitle}>{movie.overview}</Text>
         }
-        <CastCard actor={cast[2]}/>
       </View>
     </ScrollView>
 
