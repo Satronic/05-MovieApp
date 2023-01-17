@@ -4,6 +4,8 @@ import { View, Text, Image, StyleSheet, Dimensions, ScrollView } from 'react-nat
 import Icon from 'react-native-vector-icons/Ionicons';
 import { RootStackParams } from '../navigator/StackNavigator';
 import { useMovieDetails } from '../hooks/useMovieDetails';
+import { LoadingIndicator } from '../components/LoadingIndicator';
+import { MovieDetails } from '../components/MovieDetails';
 
 interface DetailsScreenProps extends StackScreenProps<RootStackParams, 'DetailsScreen'> { };
 
@@ -14,8 +16,8 @@ export const DetailsScreen = ({ route }: DetailsScreenProps) => {
   const movie = route.params;
 
   const urlImage = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
-  
-  const {isLoading, movieFull, cast} = useMovieDetails(movie.id);
+
+  const { isLoading, movieFull, cast } = useMovieDetails(movie.id);
   // console.log('State: ', JSON.stringify(state, null, 4));
 
   return (
@@ -29,14 +31,15 @@ export const DetailsScreen = ({ route }: DetailsScreenProps) => {
         />
 
         <View style={styles.textContainer}>
-          <Text style={styles.subTitle}>{movie.original_title}</Text>
           <Text style={styles.title}>{movie.title}</Text>
-          <View>
-            <Icon name="star-outline" size={16} color="yellow" />
-          </View>
-          <Text style={styles.title}>Sinopsis</Text>
-          <Text style={styles.subTitle}>{movie.overview}</Text>
+          <Text style={styles.subTitle}>{movie.original_title}</Text>
         </View>
+        {isLoading
+          ? <LoadingIndicator />
+          :
+          <MovieDetails movieFull={movieFull!} cast={cast}/>
+          // <Text style={styles.subTitle}>{movie.overview}</Text>
+        }
       </View>
     </ScrollView>
 
@@ -62,8 +65,9 @@ const styles = StyleSheet.create({
     color: 'gray'
   },
   title: {
-    color: 'white',
-    fontSize: 18,
-    marginVertical: 10
+    color: 'yellow',
+    fontSize: 24,
+    fontWeight: '700',
+    marginVertical: 2
   }
 })
