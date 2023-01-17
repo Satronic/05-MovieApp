@@ -3,6 +3,7 @@ import { StackScreenProps } from '@react-navigation/stack';
 import { View, Text, Image, StyleSheet, Dimensions, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { RootStackParams } from '../navigator/StackNavigator';
+import { useMovieDetails } from '../hooks/useMovieDetails';
 
 interface DetailsScreenProps extends StackScreenProps<RootStackParams, 'DetailsScreen'> { };
 
@@ -13,7 +14,9 @@ export const DetailsScreen = ({ route }: DetailsScreenProps) => {
   const movie = route.params;
 
   const urlImage = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
-  console.log('Movie: ', movie);
+  
+  const {isLoading, movieFull, cast} = useMovieDetails(movie.id);
+  // console.log('State: ', JSON.stringify(state, null, 4));
 
   return (
     <ScrollView>
