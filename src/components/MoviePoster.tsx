@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
-import React from 'react';
+import React, { useContext } from 'react';
 import { Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { GradientContext } from '../context/GradientContext';
 import { Movie } from '../interfaces/movieApiInterface';
 
 interface MoviePosterProps {
@@ -14,6 +15,8 @@ export const MoviePoster = ({ movie, width = 220, height = 330 }: MoviePosterPro
     const urlImage = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
 
     const navigation = useNavigation();
+
+    const { colors } = useContext(GradientContext)
 
     return (
         <TouchableOpacity
@@ -32,7 +35,8 @@ export const MoviePoster = ({ movie, width = 220, height = 330 }: MoviePosterPro
                     ...styles.image,
                     width,
                     height,
-                    borderRadius: width / 15
+                    borderRadius: width / 15,
+                    borderColor: colors.secondary
                 }}
                 source={{
                     uri: urlImage
@@ -55,6 +59,6 @@ const styles = StyleSheet.create({
     image: {
         borderRadius: 15,
         borderColor: 'white',
-        borderWidth: 0.3
+        borderWidth: 1
     }
 });

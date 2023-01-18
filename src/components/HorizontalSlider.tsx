@@ -12,7 +12,7 @@ export const HorizontalSlider = ({ movies, title }: HorizontalSliderProps) => {
     return (
         <View style={{
             padding: 10,
-            backgroundColor: '#131313'
+            // backgroundColor: '#131313'
         }}>
             <Text style={{
                 color: 'white',
