@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, StyleSheet, Text, FlatList, InteractionManager } from 'react-native';
+import { View, StyleSheet, Text, FlatList } from 'react-native';
 import { MovieFull } from '../interfaces/movieApiInterface';
 import { Cast } from '../interfaces/movieCreditsInterface';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -29,6 +29,7 @@ export const MovieDetails = ({ movieFull, cast }: MovieDetailsProps) => {
                 renderItem={({ item }) => <CastCard actor={item} />}
                 horizontal={true}
             />
+            
         </View>
     )
 }
